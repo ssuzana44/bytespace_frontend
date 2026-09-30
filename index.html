@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ByteSpace – Get Access to Hundreds Courses Available</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          blue: '#003be2', lime: '#d4fb20', 'lime-soft': '#c1e338', violet: '#7f30f7',
+          surface: '#fafafa', ink: '#040819',
+          gray: { 50:'#f5f5f6', 100:'#e5e6e8', 200:'#ced0d3', 400:'#82868e', 700:'#4b4c53', 900:'#3a3b3f', 950:'#242528' },
+          black700: '#4f4f4f',
+        },
+        fontFamily: {
+          body: ['Satoshi','Inter','system-ui','-apple-system','"Segoe UI"','Arial','sans-serif'],
+          head: ['Poppins','Inter','system-ui','-apple-system','"Segoe UI"','Arial','sans-serif'],
+          logo: ['"Clash Display"','Poppins','system-ui','Arial','sans-serif'],
+        },
+        fontSize: { xs:'12px', s:'14px', m:'16px', l:'18px', 'h-xs':'20px' },
+      },
+    },
+  };
+</script>
+
+<style>
+  html{scroll-behavior:smooth}
+  .bg-grid{
+    background-image:
+      linear-gradient(90deg, rgba(255,255,255,.1) 2px, transparent 2px),
+      linear-gradient(rgba(255,255,255,.1) 2px, transparent 2px);
+    background-size:120px 120px;
+  }
+  .blob{position:absolute;border-radius:9999px;filter:blur(40px);pointer-events:none}
+  .blob-blue{background:radial-gradient(closest-side,#003be2 0,rgba(0,59,226,.23) 53%,rgba(0,59,226,.06) 75%,rgba(0,59,226,0) 100%);opacity:.3}
+  .blob-lime{background:radial-gradient(closest-side,#cbfc01 0,rgba(203,252,1,.23) 53%,rgba(203,252,1,.06) 75%,rgba(203,252,1,0) 100%);opacity:.7}
+  .photo-shadow{filter:drop-shadow(.5px .7px 1.5px rgba(0,0,0,.04)) drop-shadow(2px 3px 3px rgba(0,0,0,.06)) drop-shadow(5px 8px 5px rgba(0,0,0,.07)) drop-shadow(10px 15px 8px rgba(0,0,0,.08)) drop-shadow(17px 24px 12px rgba(0,0,0,.09)) drop-shadow(26px 37px 18px rgba(0,0,0,.1)) drop-shadow(37px 53px 28px rgba(0,0,0,.11)) drop-shadow(51px 73px 36px rgba(0,0,0,.13))}
+  .collage-shadow{box-shadow:0 20px 30px -10px rgba(0,0,0,.15)}
+  .header__menu{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease}
+  .header__menu.is-open{max-height:420px}
+  .header__toggle span{transition:transform .3s,opacity .3s}
+  .header__toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .header__toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .header__toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #003be2;outline-offset:2px;border-radius:12px}
+</style>
+</head>
+<body class="m-0 font-body text-m text-gray-950 bg-white antialiased">
+
+<header class="absolute top-0 left-0 right-0 z-10 text-gray-50">
+  <div class="max-w-[1440px] mx-auto px-5 md:px-10 lg:px-[120px] h-[88px] lg:h-[120px] grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center">
+    <a href="#top" aria-label="ByteSpace home" class="flex items-center gap-2 font-logo font-bold text-2xl">
+      <img src="assets/logo_mark.png" alt="ByteSpace logo mark" class="w-[28.875px] h-[31.5px]">ByteSpace
+    </a>
+    <button class="header__toggle lg:hidden justify-self-end w-11 h-11 p-2.5 bg-transparent border-0 cursor-pointer" type="button" aria-expanded="false" aria-controls="menu" aria-label="Toggle navigation menu">
+      <span class="block h-0.5 my-1.5 bg-gray-50 rounded"></span>
+      <span class="block h-0.5 my-1.5 bg-gray-50 rounded"></span>
+      <span class="block h-0.5 my-1.5 bg-gray-50 rounded"></span>
+    </button>
+    <div class="header__menu lg:!max-h-none lg:contents absolute lg:static top-[88px] left-0 right-0 bg-blue lg:bg-transparent px-5 md:px-10 lg:px-0" id="menu">
+      <nav aria-label="Primary">
+        <ul class="flex flex-col lg:flex-row gap-4 lg:gap-6 py-2 lg:py-0">
+          <li><a class="font-medium leading-tight lg:font-normal lg:leading-[1.6]" href="#top" aria-current="page">Home</a></li>
+          <li><a href="#courses">Courses</a></li>
+          <li><a href="#creators">Creators</a></li>
+        </ul>
+      </nav>
+      <div class="flex flex-col lg:flex-row lg:justify-end items-start lg:items-center gap-4 lg:gap-6 pb-6 lg:pb-0 leading-6">
+        <a href="#signin">Sign In</a><a href="#join">Join Us</a><img src="assets/header-icon.png" alt="" class="w-6 h-6">
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="relative min-h-[1024px] lg:h-[1024px] bg-blue overflow-hidden text-white" aria-labelledby="hero-title">
+    <div class="bg-grid absolute top-0 bottom-0 left-1/2 w-[1440px] -ml-[720px] pointer-events-none"></div>
+    <div class="hidden lg:block absolute left-1/2 top-[582px] w-[1149px] h-[1149px] -ml-[575px] rounded-full border-[320px] border-lime-soft"></div>
+
+    <div class="relative z-[2] flex flex-col items-center gap-10 lg:gap-[60px] pt-[140px] lg:pt-[169px] text-center max-w-[1440px] mx-auto px-5 md:px-10 lg:px-[120px]">
+      <div class="flex flex-col items-center gap-8">
+        <h1 id="hero-title" class="font-head font-semibold text-[clamp(40px,6vw+16px,72px)] leading-tight tracking-[-.72px] max-w-[935px]">Get Access to Hundreds Courses Available</h1>
+        <p class="text-m md:text-l text-gray-100">Unlock your creativity, gain valuable knowledge, and grow your business with our wide range of courses.</p>
+      </div>
+      <form class="flex flex-col md:flex-row gap-4 items-stretch md:items-start w-full max-w-[581px]" role="search" onsubmit="return false">
+        <label class="flex-1 flex items-center gap-2 h-[52px] px-6 bg-white rounded-[24px]">
+          <svg viewBox="0 0 24 24" class="w-6 h-6 flex-none" aria-hidden="true"><path fill="#82868e" d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"/></svg>
+          <input class="flex-1 min-w-0 border-0 outline-none bg-transparent text-l text-gray-950 placeholder:text-gray-400" type="search" placeholder="Course, topic, creator" aria-label="Course, topic, creator">
+        </label>
+        <button class="inline-flex items-center justify-center rounded-[24px] bg-lime text-gray-950 text-l font-medium px-6 py-3 cursor-pointer md:w-auto w-full" type="submit">Search</button>
+      </form>
+    </div>
+
+    <div class="hidden lg:block absolute left-1/2 top-0 w-[1440px] h-[1024px] -ml-[720px] z-[1]">
+      <img class="photo-shadow absolute left-[470px] top-[512px] w-[578px] h-[541px] object-cover" src="assets/hero-photo.png" alt="Learner studying an online course on a laptop">
+
+      <div class="absolute left-[842px] top-[651px] w-[232px] bg-white rounded-[16px] p-4 text-gray-950">
+        <span class="block text-s font-medium mb-2">Learning Progress</span>
+        <span class="block font-head font-semibold text-[48px] leading-tight tracking-[-.48px] mb-2">55%</span>
+        <div class="h-2 rounded-[24px] bg-[#f6f6f6] overflow-hidden"><span class="block h-full rounded-[24px] bg-lime" style="width:55%"></span></div>
+      </div>
+
+      <div class="absolute left-[328px] top-[837px] w-[258px] bg-white rounded-[16px] p-4 flex flex-col gap-2 text-gray-950">
+        <p class="text-m font-medium leading-tight">Happy Students</p>
+        <p class="flex items-center gap-1 text-xs">4.5 (240)<svg viewBox="0 0 24 24" class="w-4 h-4" aria-hidden="true"><path fill="#f5b400" d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></p>
+        <div class="flex -space-x-4">
+          <img src="assets/avatar-1.png" alt="Student avatar" class="w-[43px] h-[43px] rounded-full object-cover">
+          <img src="assets/avatar-2.png" alt="Student avatar" class="w-[43px] h-[43px] rounded-full object-cover">
+          <img src="assets/avatar-3.png" alt="Student avatar" class="w-[43px] h-[43px] rounded-full object-cover">
+          <img src="assets/avatar-4.png" alt="Student avatar" class="w-[43px] h-[43px] rounded-full object-cover">
+          <img src="assets/avatar-5.png" alt="Student avatar" class="w-[43px] h-[43px] rounded-full object-cover">
+          <img src="assets/avatar-6.png" alt="Student avatar" class="w-[43px] h-[43px] rounded-full object-cover">
+          <img src="assets/avatar-7.png" alt="Student avatar" class="w-[43px] h-[43px] rounded-full object-cover">
+          <span class="w-[43px] h-[43px] rounded-full bg-lime grid place-items-center text-xs font-bold text-black">2K+</span>
+        </div>
+      </div>
+
+      <img class="absolute left-[1127px] top-[672px] w-[330px] object-contain" src="assets/ornament-1.png" alt="" aria-hidden="true">
+      <img class="absolute -left-[118px] top-[221px] w-[385px] object-contain" src="assets/ornament-2.png" alt="" aria-hidden="true">
+      <img class="absolute left-[183px] top-[477px] w-[175px] object-contain -scale-x-100" src="assets/ornament-3.png" alt="" aria-hidden="true">
+      <img class="absolute left-[18px] top-[682px] w-[342px] object-contain" src="assets/cone-3.png" alt="" aria-hidden="true">
+      <img class="absolute left-[1231px] top-[221px] w-[370px] object-contain" src="assets/cone-2.png" alt="" aria-hidden="true">
+      <img class="absolute left-[1106px] top-[464px] w-[188px] object-contain" src="assets/cone-1.png" alt="" aria-hidden="true">
+
+      <div class="absolute left-[404px] top-[639px] w-[208px] bg-white rounded-[16px] p-4 text-gray-950">
+        <span class="block text-m font-medium leading-tight">UI/UX Design</span>
+        <span class="flex gap-2 text-xs text-gray-400"><span>200 Courses</span><span aria-hidden="true">•</span><span>1000+ Students</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="bg-gray-50 py-12 lg:py-0 lg:h-[202px]" aria-label="Our partners">
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 lg:px-[120px] flex flex-wrap justify-center lg:justify-between items-center gap-6 lg:gap-0 lg:pt-20">
+      <img src="assets/partner-1.png" alt="Partner company logo 1" class="h-[41px] w-auto">
+      <img src="assets/partner-2.png" alt="Partner company logo 2" class="h-[41px] w-auto">
+      <img src="assets/partner-3.png" alt="Partner company logo 3" class="h-[41px] w-auto">
+      <img src="assets/partner-4.png" alt="Partner company logo 4" class="h-[41px] w-auto">
+      <img src="assets/partner-5.png" alt="Partner company logo 5" class="h-[41px] w-auto">
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section class="pt-[72px]" id="courses" aria-labelledby="courses-title">
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 lg:px-[120px]">
+      <div class="max-w-[917px] mx-auto text-center">
+        <h2 id="courses-title" class="font-head font-semibold text-[clamp(28px,3.5vw+14px,44px)] leading-tight tracking-[-.44px] text-ink max-w-[588px] mx-auto">Discover Your Passion, Build Your Skills</h2>
+        <p class="mt-4 text-l text-gray-400">At Bytespace Courses, we bring you closer to life-changing knowledge. Explore a variety of courses across different fields, from technology to the arts, and make a difference in your career and life.</p>
+      </div>
+
+      <div class="mt-10 flex flex-col items-center gap-5" role="tablist" aria-label="Course categories">
+        <div class="flex flex-wrap justify-center gap-4">
+          <button class="px-4 py-3 rounded-[24px] text-s font-medium whitespace-nowrap bg-lime text-gray-950" role="tab" aria-selected="true">Featured</button>
+          <button class="px-4 py-3 rounded-[24px] text-s font-medium whitespace-nowrap bg-gray-50 text-gray-700 hover:bg-gray-100" role="tab">Music</button>
+          <button class="px-4 py-3 rounded-[24px] text-s font-medium whitespace-nowrap bg-gray-50 text-gray-700 hover:bg-gray-100" role="tab">Drawing &amp; Painting</button>
+          <button class="px-4 py-3 rounded-[24px] text-s font-medium whitespace-nowrap bg-gray-50 text-gray-700 hover:bg-gray-100" role="tab">Marketing</button>
+          <button class="px-4 py-3 rounded-[24px] text-s font-medium whitespace-nowrap bg-gray-50 text-gray-700 hover:bg-gray-100" role="tab">Animation</button>
+          <button class="px-4 py-3 rounded-[24px] text-s font-medium whitespace-nowrap bg-gray-50 text-gray-700 hover:bg-gray-100" role="tab">Social Media</button>
+          <button class="px-4 py-3 rounded-[24px] text-s font-medium whitespace-nowrap bg-gray-50 text-gray-700 hover:bg-gray-100" role="tab">UI/UX Design</button>
+          <button class="px-4 py-3 rounded-[24px] text-s font-medium whitespace-nowrap bg-gray-50 text-gray-700 hover:bg-gray-100" role="tab">Creative Marketing</button>
+        </div>
+        <div class="flex flex-wrap justify-center gap-4">
+          <button class="px-4 py-3 rounded-[24px] text-s font-medium whitespace-nowrap bg-gray-50 text-gray-700 hover:bg-gray-100" role="tab">Digital Illustration</button>
+          <button class="px-4 py-3 rounded-[24px] text-s font-medium whitespace-nowrap bg-gray-50 text-gray-700 hover:bg-gray-100" role="tab">Film &amp; Video</button>
+          <button class="px-4 py-3 rounded-[24px] text-s font-medium whitespace-nowrap bg-gray-50 text-gray-700 hover:bg-gray-100" role="tab">Crafts</button>
+          <button class="px-4 py-3 rounded-[24px] text-s font-medium whitespace-nowrap bg-gray-50 text-gray-700 hover:bg-gray-100" role="tab">Freelance &amp; Entrepreneurship</button>
+          <button class="px-4 py-3 rounded-[24px] text-s font-medium whitespace-nowrap bg-gray-50 text-gray-700 hover:bg-gray-100" role="tab">Graphic Design</button>
+          <button class="px-4 py-3 rounded-[24px] text-s font-medium whitespace-nowrap bg-gray-50 text-gray-700 hover:bg-gray-100" role="tab">Photography</button>
+        </div>
+        <div class="flex flex-wrap justify-center gap-4">
+          <button class="px-4 py-3 rounded-[24px] text-s font-medium whitespace-nowrap bg-gray-50 text-gray-700 hover:bg-gray-100" role="tab">Productivity</button>
+          <button class="px-4 py-3 rounded-[24px] text-s font-medium whitespace-nowrap bg-gray-50 text-gray-700 hover:bg-gray-100" role="tab">Web Development</button>
+          <button class="px-4 py-3 rounded-[24px] text-s font-medium whitespace-nowrap bg-gray-50 text-gray-700 hover:bg-gray-100" role="tab">Data Science</button>
+          <button class="px-4 py-3 rounded-[24px] text-s font-medium whitespace-nowrap bg-gray-50 text-gray-700 hover:bg-gray-100" role="tab">Cooking</button>
+          <button class="text-s font-medium whitespace-nowrap text-blue" role="tab">+ More</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-10 mt-10">
+        <article class="relative bg-white border border-gray-200 rounded-[24px] p-[15px_15px_21px] overflow-hidden">
+          <div class="relative h-[195.14px] rounded-[12px] overflow-hidden bg-[#443131] mb-5">
+            <img src="assets/course_code1.jpg" alt="Wireframe sketches and sticky notes on a desk" class="w-full h-full object-cover">
+            <div class="absolute left-[13px] bottom-3 flex gap-3">
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-[#f6f6f6]/60 backdrop-blur-sm text-black700">17 Lessons</span>
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-[#f6f6f6]/60 backdrop-blur-sm text-black700">2 hours 16 mins</span>
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-[#f6f6f6]/60 backdrop-blur-sm text-black700">59 Comments</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-4 max-w-[calc(100%-65px)]">
+            <h3 class="font-head font-semibold text-h-xs tracking-[-.2px] text-black truncate">Learn Figma from Basic</h3>
+            <p class="text-xs text-black700">by <a href="#" class="text-blue">purepearl studio</a></p>
+            <div class="flex items-center gap-3">
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-gray-50 text-gray-700"><svg viewBox="0 0 24 24" class="w-5 h-5"><path fill="currentColor" d="M5 9h3v10H5zm5.5-4h3v14h-3zM16 13h3v6h-3z"/></svg>Beginner</span>
+              <div class="flex items-center">
+                <img src="assets/avatar-2.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <img src="assets/avatar-8.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <img src="assets/avatar-10.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <img src="assets/avatar-9.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <span class="w-8 h-8 rounded-full bg-lime grid place-items-center text-xs font-bold text-black700 flex-shrink-0">26+</span>
+              </div>
+            </div>
+            <p class="flex items-end font-head font-semibold text-h-xs tracking-[-.2px] text-blue">$25<small class="font-body font-normal text-xs text-black700">/lifetime</small></p>
+          </div>
+          <p class="absolute right-4 top-[231px] flex items-center gap-1 text-l text-black700">4.5<svg viewBox="0 0 24 24" class="w-6 h-6"><path fill="#ced0d3" d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></p>
+        </article>
+
+        <article class="relative bg-white border border-gray-200 rounded-[24px] p-[15px_15px_21px] overflow-hidden">
+          <div class="relative h-[195.14px] rounded-[12px] overflow-hidden bg-[#443131] mb-5">
+            <img src="assets/course_code2.jpg" alt="Phone screen showing app icons" class="w-full h-full object-cover">
+            <div class="absolute left-[13px] bottom-3 flex gap-3">
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-[#f6f6f6]/60 backdrop-blur-sm text-black700">17 Lessons</span>
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-[#f6f6f6]/60 backdrop-blur-sm text-black700">2 hours 16 mins</span>
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-[#f6f6f6]/60 backdrop-blur-sm text-black700">59 Comments</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-4 max-w-[calc(100%-65px)]">
+            <h3 class="font-head font-semibold text-h-xs tracking-[-.2px] text-black truncate">Build Digital Asset</h3>
+            <p class="text-xs text-black700">by <a href="#" class="text-blue">purepearl studio</a></p>
+            <div class="flex items-center gap-3">
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-gray-50 text-gray-700"><svg viewBox="0 0 24 24" class="w-5 h-5"><path fill="currentColor" d="M5 9h3v10H5zm5.5-4h3v14h-3zM16 13h3v6h-3z"/></svg>Beginner</span>
+              <div class="flex items-center">
+                <img src="assets/avatar-2.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <img src="assets/avatar-8.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <img src="assets/avatar-9.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <img src="assets/avatar-10.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <span class="w-8 h-8 rounded-full bg-lime grid place-items-center text-xs font-bold text-black700 flex-shrink-0">26+</span>
+              </div>
+            </div>
+            <p class="flex items-end font-head font-semibold text-h-xs tracking-[-.2px] text-blue">$25<small class="font-body font-normal text-xs text-black700">/lifetime</small></p>
+          </div>
+          <p class="absolute right-4 top-[231px] flex items-center gap-1 text-l text-black700">4.5<svg viewBox="0 0 24 24" class="w-6 h-6"><path fill="#ced0d3" d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></p>
+        </article>
+
+        <article class="relative bg-white border border-gray-200 rounded-[24px] p-[15px_15px_21px] overflow-hidden">
+          <div class="relative h-[195.14px] rounded-[12px] overflow-hidden bg-[#443131] mb-5">
+            <img src="assets/course_code3.jpg" alt="Data visualization dashboard on a dark screen" class="w-full h-full object-cover">
+            <div class="absolute left-[13px] bottom-3 flex gap-3">
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-[#f6f6f6]/60 backdrop-blur-sm text-black700">17 Lessons</span>
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-[#f6f6f6]/60 backdrop-blur-sm text-black700">2 hours 16 mins</span>
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-[#f6f6f6]/60 backdrop-blur-sm text-black700">59 Comments</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-4 max-w-[calc(100%-65px)]">
+            <h3 class="font-head font-semibold text-h-xs tracking-[-.2px] text-black truncate">the Power of Big Data</h3>
+            <p class="text-xs text-black700">by <a href="#" class="text-blue">purepearl studio</a></p>
+            <div class="flex items-center gap-3">
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-gray-50 text-gray-700"><svg viewBox="0 0 24 24" class="w-5 h-5"><path fill="currentColor" d="M5 9h3v10H5zm5.5-4h3v14h-3zM16 13h3v6h-3z"/></svg>Beginner</span>
+              <div class="flex items-center">
+                <img src="assets/avatar-2.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <img src="assets/avatar-8.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <img src="assets/avatar-10.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <img src="assets/avatar-9.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <span class="w-8 h-8 rounded-full bg-lime grid place-items-center text-xs font-bold text-black700 flex-shrink-0">26+</span>
+              </div>
+            </div>
+            <p class="flex items-end font-head font-semibold text-h-xs tracking-[-.2px] text-blue">$25<small class="font-body font-normal text-xs text-black700">/lifetime</small></p>
+          </div>
+          <p class="absolute right-4 top-[231px] flex items-center gap-1 text-l text-black700">4.5<svg viewBox="0 0 24 24" class="w-6 h-6"><path fill="#ced0d3" d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></p>
+        </article>
+
+        <article class="relative bg-white border border-gray-200 rounded-[24px] p-[15px_15px_21px] overflow-hidden">
+          <div class="relative h-[195.14px] rounded-[12px] overflow-hidden bg-[#443131] mb-5">
+            <img src="assets/course_code4.jpg" alt="Home office desk with 'DO MORE' sign" class="w-full h-full object-cover">
+            <div class="absolute left-[13px] bottom-3 flex gap-3">
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-[#f6f6f6]/60 backdrop-blur-sm text-black700">17 Lessons</span>
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-[#f6f6f6]/60 backdrop-blur-sm text-black700">2 hours 16 mins</span>
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-[#f6f6f6]/60 backdrop-blur-sm text-black700">59 Comments</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-4 max-w-[calc(100%-65px)]">
+            <h3 class="font-head font-semibold text-h-xs tracking-[-.2px] text-black truncate">Balancing Productivity and Life</h3>
+            <p class="text-xs text-black700">by <a href="#" class="text-blue">purepearl studio</a></p>
+            <div class="flex items-center gap-3">
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-gray-50 text-gray-700"><svg viewBox="0 0 24 24" class="w-5 h-5"><path fill="currentColor" d="M5 9h3v10H5zm5.5-4h3v14h-3zM16 13h3v6h-3z"/></svg>Beginner</span>
+              <div class="flex items-center">
+                <img src="assets/avatar-2.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <img src="assets/avatar-8.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <img src="assets/avatar-10.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <img src="assets/avatar-9.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <span class="w-8 h-8 rounded-full bg-lime grid place-items-center text-xs font-bold text-black700 flex-shrink-0">26+</span>
+              </div>
+            </div>
+            <p class="flex items-end font-head font-semibold text-h-xs tracking-[-.2px] text-blue">$25<small class="font-body font-normal text-xs text-black700">/lifetime</small></p>
+          </div>
+          <p class="absolute right-4 top-[231px] flex items-center gap-1 text-l text-black700">4.5<svg viewBox="0 0 24 24" class="w-6 h-6"><path fill="#ced0d3" d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></p>
+        </article>
+
+        <article class="relative bg-white border border-gray-200 rounded-[24px] p-[15px_15px_21px] overflow-hidden">
+          <div class="relative h-[195.14px] rounded-[12px] overflow-hidden bg-[#443131] mb-5">
+            <img src="assets/course_code5.jpg" alt="Line chart showing money trends" class="w-full h-full object-cover">
+            <div class="absolute left-[13px] bottom-3 flex gap-3">
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-[#f6f6f6]/60 backdrop-blur-sm text-black700">17 Lessons</span>
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-[#f6f6f6]/60 backdrop-blur-sm text-black700">2 hours 16 mins</span>
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-[#f6f6f6]/60 backdrop-blur-sm text-black700">59 Comments</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-4 max-w-[calc(100%-65px)]">
+            <h3 class="font-head font-semibold text-h-xs tracking-[-.2px] text-black truncate">Mastering Money Management</h3>
+            <p class="text-xs text-black700">by <a href="#" class="text-blue">purepearl studio</a></p>
+            <div class="flex items-center gap-3">
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-gray-50 text-gray-700"><svg viewBox="0 0 24 24" class="w-5 h-5"><path fill="currentColor" d="M5 9h3v10H5zm5.5-4h3v14h-3zM16 13h3v6h-3z"/></svg>Beginner</span>
+              <div class="flex items-center">
+                <img src="assets/avatar-2.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <img src="assets/avatar-8.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <img src="assets/avatar-10.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <img src="assets/avatar-9.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <span class="w-8 h-8 rounded-full bg-lime grid place-items-center text-xs font-bold text-black700 flex-shrink-0">26+</span>
+              </div>
+            </div>
+            <p class="flex items-end font-head font-semibold text-h-xs tracking-[-.2px] text-blue">$25<small class="font-body font-normal text-xs text-black700">/lifetime</small></p>
+          </div>
+          <p class="absolute right-4 top-[231px] flex items-center gap-1 text-l text-black700">4.5<svg viewBox="0 0 24 24" class="w-6 h-6"><path fill="#ced0d3" d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></p>
+        </article>
+
+        <article class="relative bg-white border border-gray-200 rounded-[24px] p-[15px_15px_21px] overflow-hidden">
+          <div class="relative h-[195.14px] rounded-[12px] overflow-hidden bg-[#443131] mb-5">
+            <img src="assets/course_code6.jpg" alt="Team discussing ideas around a table with sticky notes" class="w-full h-full object-cover">
+            <div class="absolute left-[13px] bottom-3 flex gap-3">
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-[#f6f6f6]/60 backdrop-blur-sm text-black700">17 Lessons</span>
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-[#f6f6f6]/60 backdrop-blur-sm text-black700">2 hours 16 mins</span>
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-[#f6f6f6]/60 backdrop-blur-sm text-black700">59 Comments</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-4 max-w-[calc(100%-65px)]">
+            <h3 class="font-head font-semibold text-h-xs tracking-[-.2px] text-black truncate">From Idea to Startup Success</h3>
+            <p class="text-xs text-black700">by <a href="#" class="text-blue">purepearl studio</a></p>
+            <div class="flex items-center gap-3">
+              <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-gray-50 text-gray-700"><svg viewBox="0 0 24 24" class="w-5 h-5"><path fill="currentColor" d="M5 9h3v10H5zm5.5-4h3v14h-3zM16 13h3v6h-3z"/></svg>Beginner</span>
+              <div class="flex items-center">
+                <img src="assets/avatar-2.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <img src="assets/avatar-8.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <img src="assets/avatar-10.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <img src="assets/avatar-9.png" alt="" class="w-8 h-8 rounded-full object-cover -mr-2">
+                <span class="w-8 h-8 rounded-full bg-lime grid place-items-center text-xs font-bold text-black700 flex-shrink-0">26+</span>
+              </div>
+            </div>
+            <p class="flex items-end font-head font-semibold text-h-xs tracking-[-.2px] text-blue">$25<small class="font-body font-normal text-xs text-black700">/lifetime</small></p>
+          </div>
+          <p class="absolute right-4 top-[231px] flex items-center gap-1 text-l text-black700">4.5<svg viewBox="0 0 24 24" class="w-6 h-6"><path fill="#ced0d3" d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="pt-20 pb-[120px]" aria-labelledby="cat-title">
+    <div class="max-w-[1440px] mx-auto px-5 md:px-10 lg:px-[120px]">
+      <div class="max-w-[917px] mx-auto text-center">
+        <h2 id="cat-title" class="font-head font-semibold text-[clamp(24px,3vw+12px,36px)] tracking-[-.36px] text-ink">Explore Diverse Learning Paths at Bytespace</h2>
+        <p class="mt-4 text-l text-gray-400">At ByteSpace, we believe in empowering individuals through knowledge. Our diverse range of courses spans various fields, ensuring there's something for everyone. Unleash your potential and explore our carefully curated categories.</p>
+      </div>
+      <ul class="grid grid-cols-2 md:grid-cols-[repeat(3,167px)] lg:grid-cols-[repeat(6,167px)] md:justify-between gap-6 md:gap-y-10 mt-16 origin-top min-[1025px]:max-[1439px]:[zoom:calc(0.75+(100vw-1025px)/(1439-1025)*0.15)]">
+        <li class="h-[167px] flex flex-col items-center justify-center gap-3 bg-white border border-gray-100 rounded-[24px]"><span class="w-[60px] h-[60px] grid place-items-center"><img src="assets/cat-design.png" alt="Design category icon" class="w-9 h-9"></span><span class="text-m leading-normal">Design</span></li>
+        <li class="h-[167px] flex flex-col items-center justify-center gap-3 bg-white border border-gray-100 rounded-[24px]"><span class="w-[60px] h-[60px] grid place-items-center"><img src="assets/cat-development.png" alt="Development category icon" class="w-9 h-9"></span><span class="text-m leading-normal">Development</span></li>
+        <li class="h-[167px] flex flex-col items-center justify-center gap-3 bg-white border border-gray-100 rounded-[24px]"><span class="w-[60px] h-[60px] grid place-items-center"><img src="assets/cat-it.png" alt="IT and software category icon" class="w-9 h-9"></span><span class="text-m leading-normal">IT &amp; Software</span></li>
+        <li class="h-[167px] flex flex-col items-center justify-center gap-3 bg-white border border-gray-100 rounded-[24px]"><span class="w-[60px] h-[60px] grid place-items-center"><img src="assets/cat-business.png" alt="Business category icon" class="w-9 h-9"></span><span class="text-m leading-normal">Business</span></li>
+        <li class="h-[167px] flex flex-col items-center justify-center gap-3 bg-white border border-gray-100 rounded-[24px]"><span class="w-[60px] h-[60px] grid place-items-center"><img src="assets/cat-marketing.png" alt="Marketing category icon" class="w-9 h-9"></span><span class="text-m leading-normal">Marketing</span></li>
+        <li class="h-[167px] flex flex-col items-center justify-center gap-3 bg-white border border-gray-100 rounded-[24px]"><span class="w-[60px] h-[60px] grid place-items-center"><img src="assets/cat-photography.png" alt="Photography category icon" class="w-9 h-9"></span><span class="text-m leading-normal">Photography</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="relative bg-surface overflow-hidden" id="creators" aria-label="Platform benefits">
+    <div class="absolute left-1/2 top-0 w-[1440px] h-full -ml-[720px] pointer-events-none">
+     <div class="blob blob-lime w-[1137px] h-[1137px]" style="left:214px;top:-466px"></div>
+     <div class="blob blob-blue w-[1137px] h-[1137px]" style="left:-508px;top:183px"></div>
+     <div class="blob blob-blue w-[1137px] h-[1137px]" style="left:722px;top:788px"></div>
+     <div class="blob blob-lime w-[672px] h-[672px]" style="left:-287px;top:946px"></div>
+   </div>
+
+    <div class="relative max-w-[1440px] mx-auto px-5 md:px-10 lg:px-[120px] py-20 lg:py-[120px] flex flex-col gap-16 lg:gap-[72px]">
+
+      <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-10">
+        <div class="lg:flex-1 lg:min-w-0 lg:max-w-[580px]">
+          <h2 class="font-head font-semibold text-[clamp(28px,3.5vw+14px,44px)] leading-tight tracking-[-.44px] text-gray-950">Your Path to Professional Growth Starts Here!</h2>
+          <p class="mt-10 text-l text-gray-700">Explore our curated selection of courses tailored to enhance your capabilities and accelerate your career journey. Whether you are looking to sharpen specific skills, gain industry expertise, or embark on a new career path entirely, we have the resources you need.</p>
+          <dl class="flex gap-8 lg:gap-14 mt-10">
+            <div><dt class="font-head font-medium text-[clamp(24px,3vw+12px,36px)] leading-[44px] tracking-[-.36px] text-blue">12K</dt><dd class="text-l text-gray-700 m-0">Students</dd></div>
+            <div><dt class="font-head font-semibold text-[clamp(24px,3vw+12px,36px)] leading-[44px] tracking-[-.36px] text-blue">70+</dt><dd class="text-l text-gray-700 m-0">Courses</dd></div>
+            <div><dt class="font-head font-semibold text-[clamp(24px,3vw+12px,36px)] leading-[44px] tracking-[-.36px] text-blue">16</dt><dd class="text-l text-gray-700 m-0">Creators</dd></div>
+          </dl>
+        </div>
+
+        <div class="hidden lg:block relative w-[621px] h-[552px] flex-none origin-top-left min-[1025px]:max-[1439px]:[zoom:calc(0.75+(100vw-1025px)/(1439-1025)*0.15)]" aria-hidden="true">
+          <article class="absolute left-5 top-0 z-[1] w-[373px] bg-white border border-gray-200 rounded-[24px] p-[15px_15px_21px] overflow-hidden">
+            <div class="relative h-[195px] rounded-[12px] overflow-hidden bg-[#443131] mb-5">
+              <img src="assets/course_code1.jpg" alt="" class="w-full h-full object-cover">
+              <div class="absolute left-[13px] bottom-3 flex gap-3">
+                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-[#f6f6f6]/60 backdrop-blur-sm text-black700">17 Lessons</span>
+                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-[#f6f6f6]/60 backdrop-blur-sm text-black700">2 hours 16 mins</span>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4">
+              <h3 class="font-head font-semibold text-h-xs tracking-[-.2px] text-black">Learn Figma from Basic</h3>
+              <p class="text-xs text-black700">by <a href="#" tabindex="-1" class="text-blue">purepearl studio</a></p>
+              <div><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-[24px] text-xs font-medium bg-gray-50 text-gray-700">Beginner</span></div>
+              <p class="font-head font-semibold text-h-xs tracking-[-.2px] text-blue">$25<small class="font-body font-normal text-xs text-black700">/lifetime</small></p>
+            </div>
+          </article>
+          <img class="photo-shadow absolute left-0 top-3 w-[577px] h-[540px] object-cover z-[2]" src="assets/hero-photo.png" alt="Instructor presenting a course lesson on screen">
+          <div class="absolute left-[345px] top-[213px] w-[232px] bg-white rounded-[16px] p-4 z-[3] text-gray-950">
+            <span class="block text-s font-medium mb-2">Learning Progress</span>
+            <span class="block font-head font-semibold text-[48px] leading-tight tracking-[-.48px] mb-2">55%</span>
+            <div class="h-2 rounded-[24px] bg-[#f6f6f6] overflow-hidden"><span class="block h-full rounded-[24px] bg-lime" style="width:55%"></span></div>
+          </div>
+          <img class="absolute left-[406px] top-[67px] w-[215px] h-[215px] object-contain z-[3]" src="assets/ornament-4.png" alt="" aria-hidden="true">
+        </div>
+      </div>
+
+      <div class="flex flex-col-reverse lg:flex-row justify-between items-start lg:items-center gap-10">
+        <div class="hidden lg:block relative w-[541px] h-[596px] flex-none origin-top-left min-[1025px]:max-[1439px]:[zoom:calc(0.75+(100vw-1025px)/(1439-1025)*0.15)]" aria-hidden="true">
+          <img class="photo-shadow absolute left-7 top-0 w-[435px] h-[596px] object-cover z-[2]" src="assets/feature-photo-2.png" alt="Creator managing their course on a tablet">
+          <img class="absolute left-[265px] top-[84px] w-[215px] h-[215px] object-contain z-[3]" src="assets/ornament-5.png" alt="" aria-hidden="true">
+          <div class="absolute left-[-20px] top-11 w-[232px] bg-blue rounded-[16px] p-4 z-[1] text-gray-50">
+            <span class="block text-m font-medium leading-tight">Total Revenue</span>
+            <span class="block text-[10px] leading-tight">July 1-28</span>
+            <span class="block mt-2 font-head font-semibold text-2xl leading-[32px] tracking-[-.24px]">$120.29</span>
+            <div class="h-2 rounded-[24px] bg-[#f6f6f6] overflow-hidden mt-2"><span class="block h-full rounded-[24px] bg-lime" style="width:60%"></span></div>
+          </div>
+          <div class="absolute left-[-20px] top-[194px] w-[134px] bg-blue rounded-[16px] p-4 z-[1] text-gray-50">
+            <span class="block text-m font-medium leading-tight">Year to Date</span>
+            <span class="block text-[10px] leading-tight">2023</span>
+            <span class="block mt-2 font-head font-semibold text-xl leading-tight tracking-[-.24px]">$1,200.38</span>
+            <span class="inline-block mt-2 px-2 py-0.5 rounded-[24px] bg-lime text-gray-950 text-[10px] font-medium leading-[20px]">+12$</span>
+          </div>
+          <div class="absolute left-[283px] top-[303px] w-[258px] bg-white rounded-[16px] p-4 z-[3] text-gray-950">
+            <p class="text-m font-medium leading-tight">Happy Students</p>
+            <p class="flex items-center gap-1 text-xs">4.5 (240)<svg viewBox="0 0 24 24" class="w-4 h-4" aria-hidden="true"><path fill="#f5b400" d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></p>
+            <div class="flex mt-2 -space-x-4">
+              <img src="assets/avatar-1.png" alt="Student avatar" class="w-[43px] h-[43px] rounded-full object-cover">
+              <img src="assets/avatar-2.png" alt="Student avatar" class="w-[43px] h-[43px] rounded-full object-cover">
+              <img src="assets/avatar-3.png" alt="Student avatar" class="w-[43px] h-[43px] rounded-full object-cover">
+              <img src="assets/avatar-4.png" alt="Student avatar" class="w-[43px] h-[43px] rounded-full object-cover">
+              <img src="assets/avatar-5.png" alt="Student avatar" class="w-[43px] h-[43px] rounded-full object-cover">
+              <img src="assets/avatar-6.png" alt="Student avatar" class="w-[43px] h-[43px] rounded-full object-cover">
+              <img src="assets/avatar-7.png" alt="Student avatar" class="w-[43px] h-[43px] rounded-full object-cover">
+              <span class="w-[43px] h-[43px] rounded-full bg-lime grid place-items-center text-xs font-bold text-black">2K+</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:flex-1 lg:min-w-0 lg:max-w-[580px] w-full">
+          <h2 class="font-head font-semibold text-[clamp(28px,3.5vw+14px,44px)] leading-tight tracking-[-.44px] text-gray-950 max-w-[391px]">Create &amp; Manage Courses Easily.</h2>
+          <p class="mt-10 text-l text-gray-700"><strong  class="font-semibold text-black">ByteSpace</strong> supports individuals or entities in the creation, publication, and administration of educational courses.</p>
+          <ul class="mt-10 flex flex-col gap-4">
+            <li class="flex items-center gap-2 text-l font-medium leading-tight"><img src="assets/check.png" alt="" class="w-6 h-6">Share Your Expertise</li>
+            <li class="flex items-center gap-2 text-l font-medium leading-tight"><img src="assets/check.png" alt="" class="w-6 h-6">Monetize Your Passion</li>
+            <li class="flex items-center gap-2 text-l font-medium leading-tight"><img src="assets/check.png" alt="" class="w-6 h-6">Flexibility and Autonomy</li>
+            <li class="flex items-center gap-2 text-l font-medium leading-tight"><img src="assets/check.png" alt="" class="w-6 h-6">Build a Community</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="relative min-h-[420px] lg:h-[488px] bg-blue overflow-hidden text-gray-50 text-center flex justify-center" aria-labelledby="cta-title">
+    <div class="bg-grid absolute top-0 bottom-0 left-1/2 w-[1440px] -ml-[720px] pointer-events-none"></div>
+
+    <div class="relative w-full lg:w-[1440px] h-full flex-shrink-0 min-[1025px]:max-[1439px]:[zoom:calc(0.75+(100vw-1025px)/(1439-1025)*0.15)]">
+      <img class="hidden lg:block absolute object-contain" style="left:-118px;top:-162px;width:385px" src="assets/ornament-5.png" alt="" aria-hidden="true">
+      <img class="hidden lg:block absolute object-contain" style="left:150px;top:5px;width:170px" src="assets/ornament-1.png" alt="" aria-hidden="true">
+      <img class="hidden lg:block absolute object-contain -rotate-45" style="left:-48px;top:225px;width:188px" src="assets/Cone-1.png" alt="" aria-hidden="true">
+      <img class="hidden lg:block absolute object-contain" style="left:20px;top:299px;width:342px" src="assets/Cone-5.png" alt="" aria-hidden="true">
+      <img class="hidden lg:block absolute object-contain" style="left:1010px;top:289px;width:330px" src="assets/ornament-4.png" alt="" aria-hidden="true">
+      <img class="hidden lg:block absolute object-contain" style="left:1080px;top:0px;width:188px" src="assets/Cone-4.png" alt="" aria-hidden="true">
+      <img class="hidden lg:block absolute object-contain" style="left:1200px;top:-8px;width:280px" src="assets/ornament_6.png" alt="" aria-hidden="true">
+
+      <div class="relative z-[2] max-w-[964px] mx-auto px-5 md:px-10 lg:px-0 pt-16 lg:pt-[85px] flex flex-col items-center gap-10">
+        <h2 id="cta-title" class="font-head font-semibold text-[clamp(28px,3.5vw+14px,44px)] leading-tight tracking-[-.44px] max-w-[710px]">Unlock Your Potential as a Creator with ByteSpace</h2>
+        <p class="text-l">Experience the collaboration of numerous creators and an expanding selection of courses. Register now and become a part of a community comprising over 10,000 local and international creators. Utilize our Course Editor, and showcase your expertise by publishing your finest course on the ByteSpace Course Library.</p>
+        <a class="inline-flex items-center justify-center rounded-[24px] bg-lime text-gray-950 text-l font-medium px-6 py-3" href="#join">Join as Creator</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="relative bg-surface overflow-hidden" id="creators" aria-label="Platform benefits">
+    <div class="absolute left-1/2 top-0 w-[1440px] h-full -ml-[720px] pointer-events-none">
+    <div class="blob blob-blue w-[1137px] h-[1137px]" style="left:-442px;top:149px"></div>
+    <div class="blob blob-lime w-[1137px] h-[1137px]" style="left:842px;top:-248px"></div>
+    <div class="blob blob-lime w-[672px] h-[672px]" style="left:395px;top:-138px"></div>
+    </div>
+
+    <div class="relative max-w-[1440px] mx-auto px-5 md:px-10 lg:px-[120px] py-20 lg:py-[120px] flex flex-col gap-16 lg:gap-[72px]">
+      <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-10">
+        <h2 id="testi-title" class="font-head font-semibold text-[clamp(28px,3.5vw+14px,44px)] leading-tight tracking-[-.44px] text-black w-full lg:w-[577px] flex-none">Discover What Our Community Is Saying</h2>
+        <p class="text-l text-black700 w-full lg:w-[580px]">At ByteSpace, our vibrant community of learners and creators is at the heart of what we do. Hear directly from those who have experienced the transformative journey of learning and creating on our platform. Explore testimonials that reflect the diverse perspectives of enthusiastic learners and accomplished creators.</p>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start mt-16 lg:mt-[72px]">
+        <figure class="bg-white rounded-[24px] p-6 flex flex-col gap-6 m-0">
+          <img class="w-20 h-20 rounded-full object-cover" src="assets/testimonial-1.png" alt="Portrait of Sarah M.">
+          <figcaption><p class="font-head font-semibold text-h-xs tracking-[-.2px] text-black">Sarah M.</p><p class="text-l text-blue">Enthusiastic Learner</p></figcaption>
+          <blockquote class="text-l text-black700 m-0">"ByteSpace has transformed my approach to learning. The diverse range of courses and the quality of content provided by creators have exceeded my expectations. The platform truly fosters a sense of community and lifelong learning."</blockquote>
+        </figure>
+        <figure class="bg-white rounded-[24px] p-6 flex flex-col gap-6 m-0">
+          <img class="w-20 h-20 rounded-full object-cover" src="assets/testimonial-2.png" alt="Portrait of James L.">
+          <figcaption><p class="font-head font-semibold text-h-xs tracking-[-.2px] text-black">James L.</p><p class="text-l text-blue">Lifelong Learner</p></figcaption>
+          <blockquote class="text-l text-black700 m-0">"I've tried several online learning platforms, and ByteSpace stands out for its vibrant community and the variety of courses available. The easy navigation and engaging content make it a go-to platform for continuous skill development."</blockquote>
+        </figure>
+        <figure class="bg-white rounded-[24px] p-6 flex flex-col gap-6 m-0">
+          <img class="w-20 h-20 rounded-full object-cover" src="assets/testimonial-3.png" alt="Portrait of Alex B.">
+          <figcaption><p class="font-head font-semibold text-h-xs tracking-[-.2px] text-black">Alex B.</p><p class="text-l text-blue">Inspired Creator</p></figcaption>
+          <blockquote class="text-l text-black700 m-0">"As a creator, ByteSpace has been a game-changer for me. The Course Editor is user-friendly, and the support from the community is incredible. It's fulfilling to see my courses making a positive impact on learners globally."</blockquote>
+        </figure>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t border-gray-200 bg-white pt-[71px] pb-12">
+  <div class="max-w-[1440px] mx-auto px-5 md:px-10 lg:px-[120px]">
+    <div class="flex flex-col lg:flex-row justify-between gap-10">
+      <div class="w-full lg:w-[528px]">
+        <a href="#top" class="flex items-center gap-2 font-logo font-bold text-2xl text-gray-950"><img src="assets/logo_mark.png" alt="ByteSpace logo mark" class="w-[28.875px] h-[31.5px]">ByteSpace</a>
+        <p class="mt-4 text-s">Stay Up to date with our latest features and releases by joining our newsletter.</p>
+        <form class="mt-11 max-w-[504px]" onsubmit="return false">
+          <div class="flex flex-col md:flex-row gap-6 items-stretch md:items-start">
+            <input class="flex-1 min-w-0 h-[52px] px-6 border border-gray-200 rounded-full bg-white text-m outline-none placeholder:text-gray-950" type="email" placeholder="Enter your email" aria-label="Enter your email">
+            <button class="inline-flex items-center justify-center rounded-[24px] bg-lime text-gray-950 text-l font-medium px-6 py-3" type="submit">Search</button>
+          </div>
+          <p class="mt-6 text-xs">By subscribing, you agree to our Privacy Policy and consent to receive updates from our company.</p>
+        </form>
+      </div>
+      <div class="footer__cols flex gap-8 w-full lg:w-[580px] flex-none flex-wrap">
+        <div class="footer__col w-[167px]">
+          <ul><li class="text-s mb-4 leading-tight"><a href="#courses">Featured Courses</a></li><li class="text-s mb-4 leading-tight"><a href="#courses">Featured Categories</a></li><li class="text-s mb-4 leading-tight"><a href="#courses">Business</a></li><li class="text-s mb-4 leading-tight"><a href="#courses">IT</a></li><li class="text-s leading-tight"><a href="#courses">Design</a></li></ul>
+        </div>
+        <div class="footer__col w-[167px]">
+          <ul><li class="text-s mb-4 leading-tight"><a href="#courses">Development</a></li><li class="text-s mb-4 leading-tight"><a href="#courses">Marketing</a></li><li class="text-s mb-4 leading-tight"><a href="#courses">Photography</a></li><li class="text-s mb-4 leading-tight"><a href="#courses">Finance</a></li><li class="text-s leading-tight"><a href="#courses">Sport</a></li></ul>
+        </div>
+        <div class="footer__col w-[167px]">
+          <ul><li class="text-s mb-4 leading-tight"><a href="#join">Become a Creator</a></li><li class="text-s mb-4 leading-tight"><a href="#affiliate">Affiliate Program</a></li><li class="text-s mb-4 leading-tight"><a href="#contact">Contact</a></li><li class="text-s mb-4 leading-tight"><a href="#help">Help</a></li><li class="text-s leading-tight"><a href="#about">About</a></li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col md:flex-row justify-between gap-4 mt-16 lg:mt-[130px] pt-6 border-t border-gray-200 text-xs">
+      <p>@ 2023 ByteSpace. All rights reserved.</p>
+      <ul class="flex flex-wrap gap-6"><li><a href="#privacy">Privacy Policy</a></li><li><a href="#terms">Terms of Service</a></li><li><a href="#cookies">Cookies Settings</a></li></ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn=document.querySelector('.header__toggle'),menu=document.getElementById('menu');
+  btn.addEventListener('click',function(){
+    var open=btn.getAttribute('aria-expanded')==='true';
+    btn.setAttribute('aria-expanded',String(!open));
+    menu.classList.toggle('is-open',!open);
+  });
+  window.addEventListener('resize',function(){
+    if(window.innerWidth>=1024){btn.setAttribute('aria-expanded','false');menu.classList.remove('is-open');}
+  });
+})();
+</script>
+</body>
+</html>
