@@ -1,6 +1,7 @@
 # ByteSpace
 
 A frontend implementation of the [ByteSpace design](https://www.figma.com/design/UcMEH5VGdrGsse5YpP34Kl/ByteSpace-New-Check-website--Copy-?node-id=0-1&t=lHJLq79kY7sCpwz7-1) in Figma, built for the ByteSpace website build assessment.
+<br>[Live Demo](https://bytespacefrontend.vercel.app/)
 
 ## Pages
 
